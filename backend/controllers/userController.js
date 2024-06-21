@@ -1,6 +1,7 @@
 const asyncHandler = require("../middlewares/asyncHandler");
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
+const generateToken = require("../utils/createToken");
 
 const createUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
@@ -20,6 +21,9 @@ const createUser = asyncHandler(async (req, res) => {
 
     try {
         await newUser.save();
+        // For user is being logged in
+        generateToken(res, newUser._id);
+
         res.status(201).json({
             _id: newUser._id,
             username: newUser.username,
