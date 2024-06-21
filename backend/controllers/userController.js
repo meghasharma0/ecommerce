@@ -1,5 +1,6 @@
 const asyncHandler = require("../middlewares/asyncHandler");
 const User = require("../models/userModel");
+const bcrypt = require("bcryptjs");
 
 const createUser = asyncHandler(async (req, res) => {
     const { username, email, password } = req.body;
@@ -11,7 +12,12 @@ const createUser = asyncHandler(async (req, res) => {
     const existingUser = await User.findOne({ email });
     if (existingUser) res.status(400).send("User already exists");
 
-    const newUser = new User({ username, email, password });
+    // For password protection
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newUser = new User({ username, email, password: hashedPassword });
+
     try {
         await newUser.save();
         res.status(201).json({
@@ -24,6 +30,6 @@ const createUser = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Invalid user data");
     }
-})
+});
 
 module.exports = createUser;
