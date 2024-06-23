@@ -8,6 +8,7 @@ const {
   updateCurrentUserProfile,
   deleteUserById,
   getUserById,
+  updateUserById,
 } = require("../controllers/userController");
 const {
   authenticate,
@@ -28,6 +29,10 @@ router
   .put(authenticate, updateCurrentUserProfile);
 
 // Admin routes
-router.route('/:id').delete(authenticate, authorizeAdmin, deleteUserById).get(authenticate, authorizeAdmin, getUserById);
+router
+  .route("/:id")
+  .delete(authenticate, authorizeAdmin, deleteUserById)
+  .get(authenticate, authorizeAdmin, getUserById)
+  .put(authenticate, authorizeAdmin, updateUserById)
 
 module.exports = router;

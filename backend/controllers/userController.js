@@ -138,6 +138,7 @@ const deleteUserById = asyncHandler(async (req, res) => {
   }
 });
 
+// GETTING USER DATA BY ADMIN
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).select('-password');
 
@@ -147,7 +148,30 @@ const getUserById = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("User not found");
   }
-})
+});
+
+// UPDATING USER DETAILS BY ADMIN
+const updateUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.username = req.body.username || user.username,
+    user.email = req.body.email || user.email
+    user.isAdmin = Boolean(req.body.isAdmin)
+
+    const updatedUser =  await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      username: updatedUser.username,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
 
 module.exports = {
   createUser,
@@ -157,5 +181,6 @@ module.exports = {
   getCurrentUserProfile,
   updateCurrentUserProfile,
   deleteUserById,
-  getUserById
+  getUserById,
+  updateUserById
 };
