@@ -14,25 +14,49 @@ import "../../App.css";
 
 import mainPic from "../../images/Great deals.png";
 
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+} from "@headlessui/react";
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+// const navigation = [
+//   { name: 'Dashboard', href: '#', current: true },
+//   { name: 'Team', href: '#', current: false },
+//   { name: 'Projects', href: '#', current: false },
+//   { name: 'Calendar', href: '#', current: false },
+// ]
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 const Navigation = () => {
+  const [navigation, setNavigation] = useState([
+    { name: "Dashboard", href: "#", current: true },
+    { name: "Team", href: "#", current: false },
+    { name: "Projects", href: "#", current: false },
+    { name: "Calendar", href: "#", current: false },
+  ]);
+
+  const handleNavItemClick = (index) => {
+    // const updated = navigation.map((item, i) =>item.current = false);
+    // updated[index].current = true
+    navigation.forEach((item, i) => {
+      if (index === i) item.current = true;
+      else item.current = false;
+    });
+    setNavigation(navigation);
+  };
 
   return (
     <>
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="p-2">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -50,30 +74,48 @@ const Navigation = () => {
                   </DisclosureButton>
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                  {/* LOGO */}
                   <div className="flex flex-shrink-0 items-center">
-                    <img
+                    <h1 className="text-2xl text-white font-semibold">
+                      My Logo
+                    </h1>
+                    {/* <img
                       className="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Your Company"
-                    />
+                    /> */}
                   </div>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
-                      {navigation.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
-                          )}
-                          aria-current={item.current ? "page" : undefined}
-                        >
-                          {item.name}
-                        </a>
-                      ))}
+                      <a
+                        href="/"
+                        // className={
+                        //   `${item.current
+                        //     ? "bg-gray-900 text-white"
+                        //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        //   "rounded-md px-3 py-2 text-sm font-medium"}`
+                        // }
+                        // aria-current={item.current ? "page" : undefined}
+                        // onClick={() => handleNavItemClick(index)}
+                      >
+                        Men
+                      </a>
+                      <a
+                        href="/"
+                        className="text-gray-600 transition duration-300 group px-3 py-2 text-sm font-medium"
+                        // aria-current={item.current ? "page" : undefined}
+                        // onClick={() => handleNavItemClick(index)}
+                      >
+                        Women
+                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-indigo-600 mt-1"></span>
+                      </a>
+                      {/* <a
+                        href="#"
+                        class="group text-sky-600 transition duration-300"
+                      >
+                        Link
+                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
+                      </a> */}
                     </div>
                   </div>
                 </div>
@@ -172,6 +214,8 @@ const Navigation = () => {
           </>
         )}
       </Disclosure>
+      <div className="parallax"></div>
+      <div></div>
     </>
   );
 };

@@ -34,3 +34,13 @@
   display: none;
   transition: opacity 0.2s ease-in-out; /* Add opacity transition */
 }
+
+/* TESTING */
+.parallax{
+  background-image: url("./../../images/Great\ deals.png");
+  min-height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
