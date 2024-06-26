@@ -25,34 +25,17 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-// const navigation = [
-//   { name: 'Dashboard', href: '#', current: true },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
-// ]
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Navigation = () => {
-  const [navigation, setNavigation] = useState([
-    { name: "Dashboard", href: "#", current: true },
-    { name: "Team", href: "#", current: false },
-    { name: "Projects", href: "#", current: false },
-    { name: "Calendar", href: "#", current: false },
-  ]);
+  const [currNavItem, setCurrNavItem] = useState("");
 
-  const handleNavItemClick = (index) => {
-    // const updated = navigation.map((item, i) =>item.current = false);
-    // updated[index].current = true
-    navigation.forEach((item, i) => {
-      if (index === i) item.current = true;
-      else item.current = false;
-    });
-    setNavigation(navigation);
-  };
+  const handleChangeNavItem = (navItemName, e) => {
+    e.preventDefault();
+    setCurrNavItem(navItemName);
+  }
 
   return (
     <>
@@ -76,9 +59,7 @@ const Navigation = () => {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   {/* LOGO */}
                   <div className="flex flex-shrink-0 items-center">
-                    <h1 className="text-2xl text-white font-semibold">
-                      My Logo
-                    </h1>
+                    <h1 className="text-2xl font-semibold">My Logo</h1>
                     {/* <img
                       className="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
@@ -89,33 +70,32 @@ const Navigation = () => {
                     <div className="flex space-x-4">
                       <a
                         href="/"
-                        // className={
-                        //   `${item.current
-                        //     ? "bg-gray-900 text-white"
-                        //     : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        //   "rounded-md px-3 py-2 text-sm font-medium"}`
-                        // }
-                        // aria-current={item.current ? "page" : undefined}
-                        // onClick={() => handleNavItemClick(index)}
+                        className="text-gray-600 transition duration-300 group px-3 py-2 text-sm font-medium"
+                        onClick={(e) => handleChangeNavItem("Men", e)}
                       >
                         Men
+                        <span
+                          className={
+                            currNavItem === "Men"
+                              ? "block max-w-full h-0.5 bg-indigo-600"
+                              : "block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-indigo-600"
+                          }
+                        ></span>
                       </a>
                       <a
                         href="/"
                         className="text-gray-600 transition duration-300 group px-3 py-2 text-sm font-medium"
-                        // aria-current={item.current ? "page" : undefined}
-                        // onClick={() => handleNavItemClick(index)}
+                        onClick={(e) => handleChangeNavItem("Women", e)}
                       >
                         Women
-                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-indigo-600 mt-1"></span>
+                        <span
+                          className={
+                            currNavItem === "Women"
+                              ? "block max-w-full h-0.5 bg-indigo-600"
+                              : "block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-indigo-600"
+                          }
+                        ></span>
                       </a>
-                      {/* <a
-                        href="#"
-                        class="group text-sky-600 transition duration-300"
-                      >
-                        Link
-                        <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"></span>
-                      </a> */}
                     </div>
                   </div>
                 </div>
@@ -192,7 +172,7 @@ const Navigation = () => {
             </div>
 
             <DisclosurePanel className="sm:hidden">
-              <div className="space-y-1 px-2 pb-3 pt-2">
+              {/* <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item) => (
                   <DisclosureButton
                     key={item.name}
@@ -209,7 +189,7 @@ const Navigation = () => {
                     {item.name}
                   </DisclosureButton>
                 ))}
-              </div>
+              </div> */}
             </DisclosurePanel>
           </>
         )}
