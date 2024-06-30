@@ -6,7 +6,6 @@ import {
   AiOutlineUserAdd,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { FaHeart } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navigation.css";
