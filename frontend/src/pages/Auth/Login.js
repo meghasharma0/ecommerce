@@ -6,8 +6,8 @@ import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
 import Loader from "../../components/Loader";
 import { USERS_URL } from "../../redux/constants";
-import './Login.css'
-import '../../App.css'
+import "./Login.css";
+import "../../App.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -43,11 +43,20 @@ const Login = () => {
 
   return (
     <div>
-      <section className="flex flex-wrap text-white" id="login_section">
+      <section
+        className="flex justify-around items-center text-white"
+        id="login_section"
+      >
         <div className="mr-[4rem] mt-[5rem]">
-          <h1 className="text-2xl font-semibold mb-4 signIn_heading">Sign In</h1>
+          <h1 className="text-2xl font-semibold mb-4 signIn_heading">
+            Sign In
+          </h1>
 
-          <form onSubmit={submitHandler} className="container w-[40rem]" id="login_form">
+          <form
+            onSubmit={submitHandler}
+            className="container w-[25rem]"
+            id="login_form"
+          >
             <div className="my-[2rem]">
               <label
                 htmlFor="email"
@@ -103,6 +112,13 @@ const Login = () => {
             </p>
           </div>
         </div>
+        {window.innerWidth >= 1024 && (
+          <img
+            src="https://images.pexels.com/photos/4065156/pexels-photo-4065156.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="side"
+            className="w-[50%] h-[40%] rounded"
+          />
+        )}
       </section>
     </div>
   );

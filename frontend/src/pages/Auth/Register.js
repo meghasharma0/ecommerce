@@ -32,30 +32,28 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-        toast.error('Passwords does not match');
+      toast.error("Passwords does not match");
     } else {
-        try {
-            
-            const res = await register({username, email, password}).unwrap();
-            dispatch(setCredentials({...res}));
-            navigate(redirect);
-            toast.success('User successfully registered');
-
-        } catch (error) {
-            console.log(error);
-            toast.error(error.data.message);
-        }
+      try {
+        const res = await register({ username, email, password }).unwrap();
+        dispatch(setCredentials({ ...res }));
+        navigate(redirect);
+        toast.success("User successfully registered");
+      } catch (error) {
+        console.log(error);
+        toast.error(error.data.message);
+      }
     }
-  }
+  };
 
   return (
-    <section className="flex flex-wrap text-white" id="login_section">
+    <section className="flex justify-around items-center text-white" id="login_section">
       <div className="mr-[4rem] mt-[5rem]">
         <h1 className="text-2xl font-semibold mb-4 signIn_heading">Sign In</h1>
 
         <form
-            onSubmit={submitHandler}
-          className="container w-[40rem]"
+          onSubmit={submitHandler}
+          className="container w-[25rem]"
           id="login_form"
         >
           <div className="my-[2rem]">
@@ -133,18 +131,23 @@ const Register = () => {
           {isLoading && <Loader />}
         </form>
 
-        <div className="mt-4 mb-[80px]">
+        <div className="mt-4">
           <p className="text-white">
             Already have an account ?{" "}
             <Link
               to={redirect ? `/login?redirect=${redirect}` : "/login"}
               className="text-pink-500 hover:underline"
             >
-              Register
+              Login
             </Link>
           </p>
         </div>
       </div>
+      {
+        window.innerWidth >= 1024 && (
+            <img src="https://images.pexels.com/photos/4107120/pexels-photo-4107120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="side" className="w-[50%] h-[40%] rounded" />
+        )
+      }
     </section>
   );
 };
