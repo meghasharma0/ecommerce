@@ -4,10 +4,6 @@
   overflow: hidden; /* Hide overflowing content during transition */
 }
 
-#navigation-container:hover {
-  /* width: 15%; */
-}
-
 /* Initially hide nav-item-name */
 .nav-item-name {
   display: none;
@@ -45,9 +41,6 @@
   }
   #navigation-container:hover{
     width: 35%;
-  }
-  .side_nav_icon{
-    /* font-size: 60px; */
   }
   .nav-item-name{
     margin-left: 10px;
