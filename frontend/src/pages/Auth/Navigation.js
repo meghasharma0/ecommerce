@@ -52,9 +52,7 @@ const Navigation = () => {
     <>
       <div
         style={{ zIndex: 999 }}
-        className={`${
-          showSidebar ? "hidden" : "flex"
-        } xl:flex lg:flex md:hidden sm:hidden flex-col justify-between p-3 text-white bg-[#000] w-[4%] hover:w-[15%] h-[100vh]  fixed `}
+        className="flex flex-col justify-between p-3 text-white bg-[#000] w-[4%] hover:w-[15%] h-[100%] fixed laptop:w-[4%] laptop:hover:w-[15%] tablet:w-[8%] tablet:hover:w-[20%]"
         id="navigation-container"
       >
         <div className="flex flex-col justify-center space-y-4">
@@ -62,28 +60,28 @@ const Navigation = () => {
             to="/"
             className="flex items-center transition-transform transform hover:translate-x-2"
           >
-            <AiOutlineHome className="mr-2 mt-[2rem]" size={26} />
-            <span className="hidden nav-item-name mt-[2rem]">HOME</span>{" "}
+            <AiOutlineHome className="mr-2 mt-[1rem] side_nav_icon" />
+            <span className="hidden nav-item-name mt-[1rem]">HOME</span>{" "}
           </Link>
           <Link
             to="/shop"
             className="flex items-center transition-transform transform hover:translate-x-2"
           >
-            <AiOutlineShopping className="mr-2 mt-[2rem]" size={26} />
+            <AiOutlineShopping className="mr-2 mt-[2rem] side_nav_icon" />
             <span className="hidden nav-item-name mt-[2rem]">SHOP</span>{" "}
           </Link>
           <Link
             to="/cart"
             className="flex items-center transition-transform transform hover:translate-x-2"
           >
-            <AiOutlineShoppingCart className="mr-2 mt-[2rem]" size={26} />
+            <AiOutlineShoppingCart className="mr-2 mt-[2rem] side_nav_icon" />
             <span className="hidden nav-item-name mt-[2rem]">CART</span>{" "}
           </Link>
           <Link
             to="/favourite"
             className="flex items-center transition-transform transform hover:translate-x-2"
           >
-            <FaHeart className="mr-2 mt-[2rem]" size={26} />
+            <FaHeart className="mr-2 mt-[2rem] side_nav_icon" />
             <span className="hidden nav-item-name mt-[2rem]">
               Favourite
             </span>{" "}
@@ -96,35 +94,117 @@ const Navigation = () => {
             className="flex items-center text-gray-8000 focus:outline-none"
           >
             {userInfo ? (
-              <span className="text-white">{userInfo.username}</span>
+              <>
+                <span className="text-white mr-2 mt-[2rem] side_nav_icon">
+                  {userInfo.username.charAt(0).toUpperCase()}
+                </span>
+                <span className="hidden nav-item-name mt-[2rem]">
+                  {userInfo.username}
+                </span>{" "}
+              </>
             ) : (
               <></>
             )}
           </button>
+
+          {dropdownOpen && userInfo && (
+            <ul
+              className={`absolute right-0 mt-2 rounded space-y-1.5 bg-white text-gray-600 ${
+                !userInfo.isAdmin ? "-top-20" : "-top-80"
+              } `}
+            >
+              {userInfo.isAdmin && (
+                <>
+                  <li>
+                    <Link
+                      to="/admin/dashboard"
+                      className="block px-4 py-2 hover:bg-gray-100 mt-2"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/productlist"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Products
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/categorylist"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Category
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/orderlist"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Orders
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/admin/userlist"
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Users
+                    </Link>
+                  </li>
+                </>
+              )}
+              <li>
+                <Link
+                  to="/admin/profile"
+                  className="block px-4 py-2 hover:bg-gray-100"
+                >
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/logout"
+                  onClick={logoutHandler}
+                  className="block px-4 py-2 hover:bg-gray-100 mb-2"
+                >
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          )}
         </div>
 
-        <ul>
-          <li>
-            <Link
-              to="/login"
-              className="flex items-center transition-transform transform hover:translate-x-2"
-            >
-              <AiOutlineLogin className="mr-2 mt-[2rem]" size={26} />
-              <span className="hidden nav-item-name mt-[2rem]">Login</span>{" "}
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/register"
-              className="flex items-center transition-transform transform hover:translate-x-2"
-            >
-              <AiOutlineUserAdd className="mr-2 mt-[2rem]" size={26} />
-              <span className="hidden nav-item-name mt-[2rem]">
-                Register
-              </span>{" "}
-            </Link>
-          </li>
-        </ul>
+        {/* Displaying login or register only when user is not logged in */}
+        {!userInfo && (
+          <ul>
+            <li>
+              <Link
+                to="/login"
+                className="flex items-center transition-transform transform hover:translate-x-2"
+              >
+                <AiOutlineLogin className="mr-2 mt-[2rem] side_nav_icon" />
+                <span className="hidden nav-item-name mt-[2rem]">
+                  Login
+                </span>{" "}
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/register"
+                className="flex items-center transition-transform transform hover:translate-x-2"
+              >
+                <AiOutlineUserAdd className="mr-2 mt-[2rem] side_nav_icon" />
+                <span className="hidden nav-item-name mt-[2rem]">
+                  Register
+                </span>{" "}
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
     </>
   );

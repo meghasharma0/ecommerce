@@ -1,0 +1,12 @@
+#login_section{
+    padding-left: 10rem;
+}
+
+@media screen and (max-width: 640px){  
+     #login_section{
+      padding-left: 5rem;
+     }
+     #login_form{
+      width: 250px;
+     }
+  }

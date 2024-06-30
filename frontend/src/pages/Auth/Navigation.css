@@ -1,11 +1,11 @@
 #navigation-container {
-  width: 4%;
+  /* width: 4%; */
   transition: width 0.3s ease-in-out;
   overflow: hidden; /* Hide overflowing content during transition */
 }
 
 #navigation-container:hover {
-  width: 15%;
+  /* width: 15%; */
 }
 
 /* Initially hide nav-item-name */
@@ -22,7 +22,7 @@
 .search-input {
   display: none;
   opacity: 0;
-  transition: opacity 0.2s ease-in-out; /* Add opacity transition */
+  transition: opacity 0.2s ease-in-out; 
 }
 
 #navigation-container:hover .search-input {
@@ -33,4 +33,23 @@
 #navigation-container:hover .search-icon {
   display: none;
   transition: opacity 0.2s ease-in-out; /* Add opacity transition */
+}
+
+.side_nav_icon{
+  font-size: 26px;
+}
+
+@media screen and (max-width: 640px){
+  #navigation-container{
+    width: 15%;
+  }
+  #navigation-container:hover{
+    width: 35%;
+  }
+  .side_nav_icon{
+    /* font-size: 60px; */
+  }
+  .nav-item-name{
+    margin-left: 10px;
+  }
 }
