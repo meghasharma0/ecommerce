@@ -11,17 +11,22 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './pages/User/Profile';
+import AdminRoute from './pages/Admin/AdminRoute';
+import UserList from './pages/Admin/UserList';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
+      <Route path='/login' element={<Login />}></Route>
+      <Route path='/register' element={<Register />}></Route>
 
       <Route path='' element={<PrivateRoute />}>
         <Route path='/profile' element={<Profile />} />
       </Route>
 
-      <Route path='/login' element={<Login />}></Route>
-      <Route path='/register' element={<Register />}></Route>
+      <Route path='/admin' element={<AdminRoute />}>
+        <Route path='userlist' element={<UserList />} />
+      </Route>
     </Route>
   )
 )
