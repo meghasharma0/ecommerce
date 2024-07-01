@@ -32,7 +32,7 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      toast.error("Passwords does not match");
+      toast.error("Passwords do not match");
     } else {
       try {
         const res = await register({ username, email, password }).unwrap();
