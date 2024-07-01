@@ -1,0 +1,5 @@
+@media screen and (max-width: 640px) {
+  #users_list_container{
+    margin-left: 10rem;
+  }
+}
