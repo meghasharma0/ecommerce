@@ -48,14 +48,28 @@ const updateCategory = asyncHandler(async (req, res) => {
 // DELETE CATEGORY
 const deleteCategory = asyncHandler(async (req, res) => {
   try {
-
     const removed = await Category.findByIdAndDelete(req.params.categoryId);
     res.json(removed);
-
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-module.exports = { createCategory, updateCategory, deleteCategory };
+// LIST OF ALL CATEGORIES
+const listCategory = asyncHandler(async (req, res) => {
+  try {
+    const all = await Category.find({});
+    res.json(all);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json(error.message);
+  }
+});
+
+module.exports = {
+  createCategory,
+  updateCategory,
+  deleteCategory,
+  listCategory,
+};
