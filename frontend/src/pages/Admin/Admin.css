@@ -2,4 +2,10 @@
   #users_list_container{
     margin-left: 10rem;
   }
+  #category_list_container{
+    margin-left: 75px;
+  }
+  #modal_container{
+    right: 2%;
+  }
 }
