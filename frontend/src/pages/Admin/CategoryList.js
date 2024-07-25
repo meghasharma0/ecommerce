@@ -24,6 +24,7 @@ const CategoryList = () => {
   const [updateCategory] = useUpdateCategoryMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
 
+  // CREATING CATEGORY
   const handleCreateCategory = async (e) => {
     e.preventDefault();
 
@@ -46,6 +47,7 @@ const CategoryList = () => {
     }
   };
 
+  // UPDATING CATEGORY
   const handleUpdateCategory = async (e) => {
     e.preventDefault();
 
@@ -57,7 +59,7 @@ const CategoryList = () => {
     try {
       const result = await updateCategory({
         categoryId: selectedCategory._id,
-        updatedCategory: {
+        updateCategory: {
           name: updatingName,
         },
       }).unwrap();
@@ -75,20 +77,21 @@ const CategoryList = () => {
     }
   };
 
+  // DELETING CATEGORY
   const handleDeleteCategory = async () => {
     try {
-      const result = await deleteCategory(selectedCategory._id).unwrap();
+      const result = await deleteCategory({ categoryId: selectedCategory._id }).unwrap();
 
       if (result.error) {
         toast.error(result.error);
       } else {
-        toast.success(`${result.name} is deleted.`);
+        toast.success(`${result.removed.name} is deleted.`);
         setSelectedCategory(null);
         setModalVisible(false);
       }
     } catch (error) {
       console.error(error);
-      toast.error("Category delection failed. Tray again.");
+      toast.error("Category delection failed. Try again.");
     }
   };
 

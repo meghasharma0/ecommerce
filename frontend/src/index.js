@@ -16,7 +16,7 @@ import UserList from './pages/Admin/UserList';
 import CategoryList from './pages/Admin/CategoryList';
 import ProductList from './pages/Admin/ProductList';
 import AllProducts from './pages/Admin/AllProducts';
-import ProductUpdate from './pages/Admin/productUpdate';
+import ProductUpdate from './pages/Admin/ProductUpdate';
 import OrderList from './pages/Admin/OrderList';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 

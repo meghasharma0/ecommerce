@@ -49,7 +49,13 @@ const updateCategory = asyncHandler(async (req, res) => {
 const deleteCategory = asyncHandler(async (req, res) => {
   try {
     const removed = await Category.findByIdAndDelete(req.params.categoryId);
-    res.json(removed);
+
+    if (removed) {
+      res.json({message: `Successfully deleted the category ${removed.name}`, removed});
+    } else {
+      res.status(404).json({message: "Category not found"});
+    }
+
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal server error" });
@@ -83,5 +89,5 @@ module.exports = {
   updateCategory,
   deleteCategory,
   listCategory,
-  readCategory
+  readCategory,
 };
