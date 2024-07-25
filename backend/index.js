@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoute');
 const categoryRoutes = require('./routes/categoryRoutes');
+const productRoutes = require('./routes/productRoutes')
 
 dotenv.config();
 const port = process.env.PORT || 8000;
@@ -22,6 +23,7 @@ app.use(cookieParser());
 
 app.use('/api/users', userRoutes);
 app.use('/api/category', categoryRoutes);
+app.use('/api/product', productRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello Backend');
