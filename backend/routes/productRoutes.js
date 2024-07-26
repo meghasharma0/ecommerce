@@ -13,6 +13,7 @@ const {
   removeProduct,
   fetchProducts,
   fetchProductById,
+  fetchAllProducts,
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -21,6 +22,9 @@ router
   .route("/")
   .get(fetchProducts)
   .post(authenticate, authorizeAdmin, formidable(), addProduct);
+
+router.route('/allProducts').get(fetchAllProducts);
+
 router
   .route("/:id")
   .get(fetchProductById)

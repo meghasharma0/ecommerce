@@ -58,7 +58,7 @@ const removeProduct = asyncHandler(async (req, res) => {
   }
 });
 
-// GET ALL PRODUCTS
+// GET ALL PRODUCTS WITH FILTERATION
 const fetchProducts = asyncHandler(async (req, res) => {
   try {
     const pageSize = 6;
@@ -81,22 +81,35 @@ const fetchProducts = asyncHandler(async (req, res) => {
   }
 });
 
-// GET PRODUCT BY ID 
+// GET PRODUCT BY ID
 const fetchProductById = asyncHandler(async (req, res) => {
   try {
-    
     const product = await Product.findById(req.params.id);
 
-    if (product){
+    if (product) {
       return res.json(product);
     } else {
       res.status(404);
-      throw new Error("Product not found")
+      throw new Error("Product not found");
     }
-
   } catch (error) {
     console.error(error);
     res.status(404).json({ error: "Product not found" });
+  }
+});
+
+// FETCH ALL PRODUCTS
+const fetchAllProducts = asyncHandler(async (req, res) => {
+  try {
+    const products = await Product.find({})
+      .populate("category")
+      .limit(12)
+      .sort({ createdAt: -1 });
+
+      res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 
@@ -105,5 +118,6 @@ module.exports = {
   updateProductDetails,
   removeProduct,
   fetchProducts,
-  fetchProductById
+  fetchProductById,
+  fetchAllProducts,
 };
