@@ -14,6 +14,7 @@ const {
   fetchProducts,
   fetchProductById,
   fetchAllProducts,
+  addProductReview,
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -24,6 +25,7 @@ router
   .post(authenticate, authorizeAdmin, formidable(), addProduct);
 
 router.route('/allProducts').get(fetchAllProducts);
+router.route('/:id/reviews').post(authenticate, checkId, addProductReview);
 
 router
   .route("/:id")
