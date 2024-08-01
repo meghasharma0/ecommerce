@@ -15,6 +15,8 @@ const {
   fetchProductById,
   fetchAllProducts,
   addProductReview,
+  fetchTopProducts,
+  fetchNewProducts,
 } = require("../controllers/productController");
 
 const router = express.Router();
@@ -26,6 +28,9 @@ router
 
 router.route('/allProducts').get(fetchAllProducts);
 router.route('/:id/reviews').post(authenticate, checkId, addProductReview);
+
+router.get("/top", fetchTopProducts);
+router.get("/new", fetchNewProducts);
 
 router
   .route("/:id")
